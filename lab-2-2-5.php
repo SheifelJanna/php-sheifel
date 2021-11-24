@@ -1,7 +1,7 @@
 <p> Шейфель Жанна ПИ-321 </p>
 <?php
     function f($u, $t) {
-        if ($u > 0 && t > 0) {
+        if ($u > 0 && $t > 0) {
             return $u * $u + $t;
         } else if ($u > 0 && $t > 0) {
             return $u + ($t*$t) ;
