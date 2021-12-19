@@ -80,16 +80,16 @@
 <a href='s3-2.html'>Задача 3.2</a>
 </li>
 <li>
-<a href='s3-3.php'>Задача 3.3</a>
+<a href='s3-31.html'>Задача 3.3</a>
 </li>
 <li>
-<a href='s3-4.php'>Задача 3.4</a>
+<a href='s3-4.html'>Задача 3.4</a>
 </li>
 <li>
-<a href='s3-5.php'>Задача 3.5</a>
+<a href='s3-5.html'>Задача 3.5</a>
 </li>
 <li>
-<a href='s3-6.5.php'>Задача 3.6 Вариант 5</a>
+<a href='s3-6.5.html'>Задача 3.6 Вариант 5</a>
 </li>
 <li>
 <a href='s3-6.11.html'>Задача 3.6 Вариант 11</a>
