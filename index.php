@@ -1,100 +1,35 @@
-<p> Дата и время:
-<p>
-<?php
- $d=date("d.m.Y H:i");
- echo($d);
-?>
-<p><b> Лабораторная работа 1 </b></p>
-<p> Самостоятельная работа 1 </p>
-<ul>
-<li>
-<a href='/lab-1-1.php'>Упражнение 1-2</a>
-</li>
-<li>
-<a href='/lab-1-2.php'>Упражнение 1-3</a>
-</li>
-<li>
-<a href='/lab-1-3.php'>Упражнение 1-4</a>
-</li>
-<li>
-<a href='/lab-1-5.php'>Упражнение 1-5</a>
-</li>
-<li>
-<a href='/lab-2-1.php'>Упражнение 1-6</a>
-</li>
-<li>
-<a href='/lab-2-2.php'>Упражнение 1-7</a>
-</li>
-<li>
-<a href='/lab-2-3.php'>Упражнение 1-8</a>
-</li>
-<li>
-<a href='/lab-2-4.php'>Упражнение 1-9</a>
-</li>
-<li>
-<a href='/lab-2-5.php'>Упражнение 1-10</a>
-</li>
-<li>
-<a href='/lab-2-6.php'>Упражнение 1-11</a>
-</li>
-<li>
-<a href='/lab-2-7.php'>Упражнение 1-12</a>
-</li>
-<li>
-<a href='/lab-2-8.php'>Упражнение 1-13</a>
-</li>
-<li>
-<a href='/lab-2-9.php'>Упражнение 1-14</a>
-</li> 
-<p> Самостоятельная работа 2 </p>
-<li>
-<a href='/lab-2-10.php'>Задача № 1-2</a>
-</li>
-<li>
-<a href='/lab-2-11.php'>Задача № 1-3</a>
-</li>
-<p> Лабораторная работа 2 </p>
-<li>
-<a href='/lab-2-2-1.php'>Задание № 2-1</a>
-</li>
-<li>
-<a href='/lab-2-2-2.php'>Задание № 2-2</a>
-</li>
-<li>
-<a href='/lab-2-2-3.php'>Задание № 2-3</a>
-</li>
-<li>
-<a href='/lab-2-2-4.php'>Задача № 2.4</a>
-</li>
-<li>
-<a href='/lab-2-2-5.php'>Задача № 2.5</a>
-</li>
-<li>
-<a href='/lab-2-2-6.php'>Задача № 2.6</a>
-</li>
-<p> Лабораторная работа 3 </p>
-<li>
-<a href='s3-1.html'>Задача 3.1</a>
-</li>
-<li>
-<a href='s3-2.html'>Задача 3.2</a>
-</li>
-<li>
-<a href='s3-31.html'>Задача 3.3</a>
-</li>
-<li>
-<a href='s3-4.html'>Задача 3.4</a>
-</li>
-<li>
-<a href='s3-5.html'>Задача 3.5</a>
-</li>
-<li>
-<a href='s3-6.5.html'>Задача 3.6 Вариант 5</a>
-</li>
-<li>
-<a href='s3-6.11.html'>Задача 3.6 Вариант 11</a>
-</li>
-<li>
-<a href='s3-6.16.html'>Задача 3.6 Вариант 16</a>
-</li>
-</ul>
+<?
+require_once 'connect.php'; ?>
+<html>
+<head> <title> Сведения о прользователях сайта </title> </head>
+<body>
+<table border="1">
+
+    <h2>Зарегистрированные пользователи:</h2>
+    <table border="1">
+        <tr>
+            <th> Имя </th> <th> E-mail </th>
+            <th> Редактировать </th> <th> Уничтожить </th> </tr>
+
+        <?php
+        $link = mysqli_connect($host, $user, $password, $database)
+        or die("Ошибка " . mysqli_error($link));
+
+        $result = mysqli_query($link, "SELECT id_user, user_name, user_e_mail FROM user");// запрос на выборку сведений о пользователях
+        mysqli_select_db($link, "users");
+
+        while ($row= mysqli_fetch_array($result)){// для каждой строки из запроса
+            echo "<tr>";
+            echo "<td>" . $row['user_name'] . "</td>";
+            echo "<td>" . $row['user_e_mail'] . "</td>";
+            echo "<td><a href='edit.php?id=" . $row['id_user'] . "'> Редактировать </a> </td>"; // запуск скрипта для редактирования
+            echo "<td><a href='delete.php?id=" . $row['id_user'] . "'> Удалить </a></td>"; // запуск скрипта для удаления записи
+            echo "</tr>";
+        }
+        print "</table>";
+        $num_rows = mysqli_num_rows($result); // число записей в таблице БД
+        print("<P> Всего пользователей: $num_rows </p>");
+        ?>
+        <p> <a href="new.php"> Добавить пользователя </a>
+</body>
+</html>
