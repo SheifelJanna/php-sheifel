@@ -1,35 +1,49 @@
-<?
-require_once 'connect.php'; ?>
 <html>
-<head> <title> Сведения о прользователях сайта </title> </head>
+<head><title> Сведения о Фильмах </title></head>
 <body>
+<h2>Сведения о Фильмах:</h2>
 <table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Название</th>
+        <th>Жанр</th>
+        <th>Режиссер</th>
+        <th>Год</th>
+        <th>Сборы</th>
+        <th>Редактировать</th>
+        <th>Уничтожить</th>
+    </tr>
+    </tr>
+    <?php
+    require_once 'connect1.php';
+    $link = mysqli_connect($host, $user, $password, $database) or die ("Невозможно
+подключиться к серверу" . mysqli_error($link));
+    $result = mysqli_query($link, "SELECT id_f, name_f, janr, dir, `year`, sbor
+FROM film");
+    mysqli_select_db($link, "stud");
 
-    <h2>Зарегистрированные пользователи:</h2>
-    <table border="1">
-        <tr>
-            <th> Имя </th> <th> E-mail </th>
-            <th> Редактировать </th> <th> Уничтожить </th> </tr>
-
-        <?php
-        $link = mysqli_connect($host, $user, $password, $database)
-        or die("Ошибка " . mysqli_error($link));
-
-        $result = mysqli_query($link, "SELECT id_user, user_name, user_e_mail FROM user");// запрос на выборку сведений о пользователях
-        mysqli_select_db($link, "users");
-
-        while ($row= mysqli_fetch_array($result)){// для каждой строки из запроса
-            echo "<tr>";
-            echo "<td>" . $row['user_name'] . "</td>";
-            echo "<td>" . $row['user_e_mail'] . "</td>";
-            echo "<td><a href='edit.php?id=" . $row['id_user'] . "'> Редактировать </a> </td>"; // запуск скрипта для редактирования
-            echo "<td><a href='delete.php?id=" . $row['id_user'] . "'> Удалить </a></td>"; // запуск скрипта для удаления записи
-            echo "</tr>";
-        }
-        print "</table>";
-        $num_rows = mysqli_num_rows($result); // число записей в таблице БД
-        print("<P> Всего пользователей: $num_rows </p>");
-        ?>
-        <p> <a href="new.php"> Добавить пользователя </a>
+    while ($row = mysqli_fetch_array($result)) {
+        echo "<tr>";
+        echo "<td>" . $row['id_f'] . "</td>";
+        echo "<td>" . $row['name_f'] . "</td>";
+        echo "<td>" . $row['janr'] . "</td>";
+        echo "<td>" . $row['dir'] . "</td>";
+        echo "<td>" . $row['year'] . "</td>";
+        echo "<td>" . $row['sbor'] . "</td>";
+        echo "<td><a href='edit_film.php?id_f=" . $row['id_f']
+            . "'>Редактировать</a></td>"; // запуск скрипта для редактирования
+        echo "<td><a href='delete_film.php?id_f=" . $row['id_f']
+            . "'>Удалить</a></td>"; // запуск скрипта для удаления записи
+        echo "</tr>";
+    }
+    print "</table>";
+    $num_rows = mysqli_num_rows($result); // число записей в таблице БД
+    print("<P>Всего Фильмов: $num_rows </p>");
+    ?>
+    <p><a href="new_film.php"> Добавить Фильм</a>
+    <p><a href="sean.php">Киносеанс</a>
+    <p><a href="zal.php">Кинозал</a>
+    <p><a href="gen_pdf.php">Скачать pdf-файл</a>
+    <p><a href="gen_xls.php">Скачать xls-файл</a>
 </body>
 </html>
