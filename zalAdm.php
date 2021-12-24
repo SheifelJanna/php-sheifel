@@ -8,6 +8,7 @@
         <th>Название</th>
         <th>Категория</th>
         <th>Редактировать</th>
+        <th>Уничтожить</th>
     </tr>
     </tr>
     <?php
@@ -25,6 +26,8 @@
         echo "<td>" . $row['cat_z'] . "</td>";
         echo "<td><a href='edit_zal.php?id_z=" . $row['id_z']
             . "'>Редактировать</a></td>"; // запуск скрипта для редактирования
+        echo "<td><a href='delete_zal.php?id_z=" . $row['id_z']
+            . "'>Удалить</a></td>"; // запуск скрипта для удаления записи
         echo "</tr>";
     }
     print "</table>";
@@ -37,6 +40,5 @@
         echo "<p><a href=filmAdm.php> Вернуться назад </a>";
     include("checkSession.php");
     ?>
-
 </body>
 </html>

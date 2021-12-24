@@ -1,4 +1,5 @@
 <?php
+include("checks.php");
 require_once 'connect1.php';
 $mysqli = new mysqli($host, $user, $password, $database);
 if ($mysqli->connect_errno) {
@@ -16,9 +17,15 @@ $result = $mysqli->query("INSERT INTO sean SET date_s='$date_s', id_f='$id_f', i
 
 if ($result) {
     print "<p>Внесение данных прошло успешно!";
-    print "<p><a href='sean.php'> Вернуться к списку </a>";
+    if ($_SESSION['type'] == 1)
+        echo "<p><a href=sean.php> Вернуться к списку Сеансов </a>";
+    elseif ($_SESSION['type'] == 2)
+        echo ".<p><a href=seanAdm.php> Вернуться к списку Сеансов </a>";
 } else {
-    print "Ошибка сохранения <a href='sean.php'> Вернуться к списку </a>";
+    if ($_SESSION['type'] == 1)
+        echo "Ошибка сохранения . <p><a href=sean.php> Вернуться к списку Сеансов </a>";
+    elseif ($_SESSION['type'] == 2)
+        echo "Ошибка сохранения . <p><a href=seanAdm.php> Вернуться к списку Сеансов </a>";
 }
 
 ?>

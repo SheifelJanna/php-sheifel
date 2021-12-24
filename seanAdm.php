@@ -11,10 +11,11 @@
         <th>Всего мест</th>
         <th>Занятых мест</th>
         <th>Редактировать</th>
+        <th>Уничтожить</th>
     </tr>
     </tr>
     <?php
-    include("checks.php");
+    include ("checks.php");
     require_once 'connect1.php';
     $mysqli = new mysqli($host, $user, $password, $database);
     if ($mysqli->connect_errno) {
@@ -40,12 +41,15 @@ LEFT JOIN zal ON sean.id_z=zal.id_z");
 
             echo "<td><a href='edit_sean.php?id=" . $row['id']
                 . "'>Редактировать</a></td>"; //Запуск редактирования
+            echo "<td><a href='delete_sean.php?id=" . $row['id']
+                . "'>Удалить</a></td>"; //запуск удаления
             echo "</tr>";
             $counter++;
         }
     }
     print "</table>";
     print("<p>Всего Сеансов: $counter </p>");
+
     echo "<p><a href=new_sean.php> Добавить Сеанс </a>";
     if ($_SESSION['type'] == 1)
         echo "<p><a href=film.php> Вернуться назад </a>";
@@ -53,6 +57,5 @@ LEFT JOIN zal ON sean.id_z=zal.id_z");
         echo "<p><a href=filmAdm.php> Вернуться назад </a>";
     include("checkSession.php");
     ?>
-
 </body>
 </html>

@@ -1,4 +1,5 @@
 <?php
+include ("checks.php");
 require_once 'connect1.php';
 require('tfpdf/tfpdf.php');
 

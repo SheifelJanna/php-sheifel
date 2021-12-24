@@ -4,6 +4,7 @@
 </head>
 <body>
 <?php
+include ("checks.php");
 require_once 'connect1.php';
 $mysqli = new mysqli($host, $user, $password, $database);
 if ($mysqli->connect_errno) {
@@ -45,7 +46,6 @@ if ($prod) {
 
 }
 
-
 print "<form action='save_edit_sean.php' method='get'>";
 
 $result = $mysqli->query("SELECT id_f, name_f FROM film WHERE id_f <> '$id_f' ");
@@ -79,7 +79,10 @@ print "<br> Занятых мест: <input name='count_zan' size='11' type='int
 print "<input type='hidden' name='id' size='11' value=$id>";
 print "<input  name='save' type='submit' value='Сохранить'>";
 print "</form>";
-print "<p><a href='sean.php'> Вернуться к Сеансам </a>";
+if ($_SESSION['type'] == 1)
+    echo "<p><a href=sean.php> Вернуться назад </a>";
+elseif ($_SESSION['type'] == 2)
+    echo "<p><a href=seanAdm.php> Вернуться назад </a>";
 ?>
 </body>
 </html>

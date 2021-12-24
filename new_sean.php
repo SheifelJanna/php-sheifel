@@ -4,6 +4,7 @@
 <H2>Добавление Сеанса:</H2>
 <form action="save_new_sean.php" method="get">
     <?php
+    include ("checks.php");
     require_once 'connect1.php';
     $mysqli = new mysqli($host, $user, $password, $database);
     if ($mysqli->connect_errno) {
@@ -37,12 +38,13 @@
     print "<br>Дата: <input name='date_s' placeholder='dd-mm-yyyy' type='datetime-local' value=$date_s>";
     print "<br> Кол-во мест: <input name='count_s' size='11' type='int' value=$count_s>";
     print "<br> Занятых мест: <input name='count_zan' size='11' type='int' value=$count_zan>";
+    echo "<p><input name='add' type='submit' value='Добавить'></p>";
+    echo "<p><input name='b2' type='reset' value='Очистить'></p>";
+    if ($_SESSION['type'] == 1)
+        echo "<p><a href=sean.php> Вернуться к списку Сеансов </a></p>";
+    elseif ($_SESSION['type'] == 2)
+        echo "<p><a href=seanAdm.php> Вернуться к списку Сеансов </a></p>";
     ?>
-
-
-    <p><input name="add" type="submit" value="Добавить">
-        <input name="b2" type="reset" value="Очистить"></p>
-    <p><a href="sean.php"> Вернуться к списку Сеансов </a>
 </form>
 </body>
 </html>
