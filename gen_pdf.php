@@ -1,5 +1,4 @@
 <?php
-include ("checks.php");
 require_once 'connect1.php';
 require('tfpdf/tfpdf.php');
 
@@ -50,6 +49,9 @@ if ($result) {
         $pdf->Cell($w[1], $h, $row[0], 'LRB');
 
         for ($c = 2; $c < 8; $c++) {
+            if($c == 6) {
+                $row[$c - 1] = date('d-m-Y H:i:s', strtotime($row[$c - 1]));
+            }
             $pdf->Cell($w[$c], $h, $row[$c - 1], 'RB');
         }
         $pdf->Ln();

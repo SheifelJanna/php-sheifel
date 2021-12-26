@@ -1,5 +1,4 @@
 <?php
-include ("checks.php");
 require_once 'connect1.php';
 require_once('php_excel/Classes/PHPExcel.php');
 require_once('php_excel/Classes/PHPExcel/Writer/Excel2007.php');
@@ -59,6 +58,9 @@ if ($result){
         $c++;
 
         foreach ($row as $cell){
+            if ($c==6){
+                    $cell = date('d-m-Y H:i:s', strtotime($cell));
+                }
             $sheet->setCellValueByColumnAndRow($c,$r,$cell);
             $c++;
         }
